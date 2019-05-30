@@ -13,7 +13,7 @@
         <Button x:Name="play" Content="Play" HorizontalAlignment="Left" Height="41" Margin="284,145,0,0" VerticalAlignment="Top" Width="56" Click="Play_Click"/>
         <Button x:Name="pause" Content="Pause" HorizontalAlignment="Left" Height="41" Margin="376,145,0,0" VerticalAlignment="Top" Width="56" Click="Pause_Click"/>
         <Button x:Name="stop" Content="Stop" HorizontalAlignment="Left" Height="41" Margin="460,145,0,0" VerticalAlignment="Top" Width="56" Click="Stop_Click"/>
-        <Slider x:Name="volume" HorizontalAlignment="Left" Height="34" Margin="346,227,0,0" VerticalAlignment="Top" Width="112" RenderTransformOrigin="0.5,0.5" ValueChanged="Volume_ValueChanged"/>
+        <Slider x:Name="volume" HorizontalAlignment="Left" Height="34" Margin="346,227,0,0" VerticalAlignment="Top" Width="112" RenderTransformOrigin="3,3" ValueChanged="Volume_ValueChanged"/>
         <TextBlock HorizontalAlignment="Left" Height="27" Margin="376,253,0,0" TextWrapping="Wrap" Text="Volume" VerticalAlignment="Top" Width="56"/>
         <Label x:Name="head" Content="" HorizontalAlignment="Left" Margin="269,86,0,0" VerticalAlignment="Top" Width="56"/>
         <Label x:Name="tail" Content="" HorizontalAlignment="Left" Margin="480,86,0,0" VerticalAlignment="Top" Width="56"/>
