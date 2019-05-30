@@ -81,12 +81,35 @@ namespace lab6
 
         private void Play_Click(object sender, RoutedEventArgs e)
         {
+                if (list.SelectedIndex > -1)//если элемент выбран
+                {
                     player.Play();
                     Timer.Start();
 
                     head.Content = "0:0:0";
-                    tail.Content = player.NaturalDuration.TimeSpan.Hours + ":" + player.NaturalDuration.TimeSpan.Minutes + ":" + player.NaturalDuration.TimeSpan.Seconds;                      
-            
+                    tail.Content = player.NaturalDuration.TimeSpan.Hours + ":" + player.NaturalDuration.TimeSpan.Minutes + ":" + player.NaturalDuration.TimeSpan.Seconds;
+                }
+                else
+            {               
+                Random rnd = new Random();
+                int num = list.Items.Count;               
+
+                num = rnd.Next(0, num - 1);
+
+                tmp = list.Items[num].ToString();
+                string melody = sound[tmp];
+                player.Open(new Uri(melody, UriKind.Relative));
+                //Thread.Sleep(800);
+                player.Play();
+                Timer.Start();
+                list.SelectedItem = tmp;
+
+                //не понимаю, в чем прикол с head/tail...
+                head.Content = "0:0:0";
+                tail.Content = player.NaturalDuration.TimeSpan.Hours + ":" + player.NaturalDuration.TimeSpan.Minutes + ":" + player.NaturalDuration.TimeSpan.Seconds;
+               
+            }
+
         }
 
         private void List_SelectionChanged(object sender, SelectionChangedEventArgs e)
