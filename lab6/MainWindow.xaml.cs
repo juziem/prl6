@@ -50,6 +50,9 @@ namespace lab6
             {
                 slide.Maximum = player.NaturalDuration.TimeSpan.TotalSeconds;//длительность содержимого
                 slide.Value = 0;
+
+                head.Content = "0:0:0";
+                tail.Content = player.NaturalDuration.TimeSpan.Hours + ":" + player.NaturalDuration.TimeSpan.Minutes + ":" + player.NaturalDuration.TimeSpan.Seconds;
             }
             catch
             {
@@ -71,12 +74,19 @@ namespace lab6
 
             private void Add_Click(object sender, RoutedEventArgs e)
         {
-            OpenFileDialog dlg = new OpenFileDialog();
-            dlg.ShowDialog();
-            tmp = System.IO.Path.GetFileNameWithoutExtension(dlg.FileName);
 
-            sound.Add(tmp, dlg.FileName);
-            list.Items.Add(tmp);
+            OpenFileDialog dlg = new OpenFileDialog();
+            dlg.Multiselect = true;
+            dlg.ShowDialog();
+
+
+
+            foreach (string fileName in dlg.FileNames)
+            {
+                tmp = System.IO.Path.GetFileNameWithoutExtension(fileName);
+                sound.Add(tmp, fileName);
+                list.Items.Add(tmp);
+            }
         }     
 
         private void Play_Click(object sender, RoutedEventArgs e)
@@ -85,9 +95,7 @@ namespace lab6
                 {
                     player.Play();
                     Timer.Start();
-
-                    head.Content = "0:0:0";
-                    tail.Content = player.NaturalDuration.TimeSpan.Hours + ":" + player.NaturalDuration.TimeSpan.Minutes + ":" + player.NaturalDuration.TimeSpan.Seconds;
+                                    
                 }
                 else
             {               
@@ -99,15 +107,11 @@ namespace lab6
                 tmp = list.Items[num].ToString();
                 string melody = sound[tmp];
                 player.Open(new Uri(melody, UriKind.Relative));
-                //Thread.Sleep(800);
+
                 player.Play();
                 Timer.Start();
                 list.SelectedItem = tmp;
-
-                //не понимаю, в чем прикол с head/tail...
-                head.Content = "0:0:0";
-                tail.Content = player.NaturalDuration.TimeSpan.Hours + ":" + player.NaturalDuration.TimeSpan.Minutes + ":" + player.NaturalDuration.TimeSpan.Seconds;
-               
+                                              
             }
 
         }
@@ -163,7 +167,7 @@ namespace lab6
             player.Stop();
             Timer.Stop();
             head.Content = "";
-            tail.Content = "";
+            //tail.Content = "";
         }
 
         private void Volume_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
